@@ -33,7 +33,7 @@ Three training configurations are evaluated on a benchmark of **22 open-source R
 ├── EEL6812_Final_Project.ipynb   # Main notebook — all code, training, and evaluation
 ├── data/
 │   ├── rtl/                      # 22 RTL modules (.sv files)
-│   └── sva/                      # 22 SVA property files (.sva), one per module
+│   └── sva/                      # 22 SVA property files (.sv), one per module
 ├── EEL6812_Final_Report.pdf      # Final project report (ICML 2026 format)
 └── README.md
 ```
@@ -41,7 +41,7 @@ Three training configurations are evaluated on a benchmark of **22 open-source R
 The `data/rtl/` directory contains the following modules:
 `barrel_shifter`, `clock_divider`, `comparator`, `crc_generator`, `dual_port_ram`, `edge_detector`, `fifo`, `fixed_latency_pipeline`, `fsm_controller`, `handshake_ctrl`, `lzc`, `mux_tree`, `parity_unit`, `popcount`, `priority_encoder`, `pulse_stretcher`, `reg_file`, `rr_arbiter`, `shift_register`, `skid_buffer`, `updown_counter`, `watchdog_timer`
 
-Each module has a matching `.sva` file in `data/sva/` containing 8–12 manually written SVA properties.
+Each module has a matching `.sv` file in `data/sva/` containing 8–17 manually written SVA properties.
 
 > **Note:** Model checkpoints are not included in this repository due to file size. All checkpoints can be reproduced by running the notebook from scratch (see instructions below). Training takes approximately 15–30 minutes on a free Colab GPU.
 
@@ -57,7 +57,7 @@ Navigate to [Google Colab](https://colab.research.google.com) and upload the not
 
 ### Step 2 — Upload the data files
 
-When you reach **Cell 2** of the notebook, it will prompt you to upload your `.sv` and `.sva` files using the Colab file upload widget. Upload all files from the `data/rtl/` and `data/sva/` directories of this repository. File names must match exactly (e.g., `fifo.sv` paired with `fifo.sva`).
+When you reach **Cell 2** of the notebook, it will prompt you to upload your `.sv` files using the Colab file upload widget. Upload all files from the `data/rtl/` and `data/sva/` directories of this repository. File names must match exactly (e.g., `fifo.sv` paired with `fifo_props.sv`).
 
 ### Step 3 — Run cells in order
 
@@ -66,7 +66,7 @@ Run all cells from top to bottom. Each cell is labeled with its purpose. The not
 | Cell | Purpose |
 |---|---|
 | Cell 1 | Install dependencies (`sv2v`, `pyverilog`, etc.) |
-| Cell 2 | Upload `.sv` and `.sva` files |
+| Cell 2 | Upload `.sv` files |
 | Cell 3 | Convert `.sv` → `.v` using `sv2v` |
 | Cell 4 | Extract 18-dimensional RTL feature vectors |
 | Cell 4b | Dataset overview visualizations |
